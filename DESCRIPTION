@@ -3,7 +3,7 @@ Type: Package
 Title: Interface to the Project Tycho 2.0 database
 Version: 0.0.0.9000
 Depends: R (>= 3.4.3)
-Imports: rlang (>= 0.2.1)
+Imports: 
 Author: Eric Marty <marty@ericmarty.com>
 Maintainer: Eric Marty <marty@ericmarty.com>
 Description: This package provides a simple wrapper for the Project Tycho 2.0 web API.
