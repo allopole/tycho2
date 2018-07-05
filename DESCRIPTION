@@ -1,9 +1,9 @@
 Package: tycho2
 Type: Package
 Title: Interface to the Project Tycho 2.0 database
-Version: 0.0.0.9000
+Version: 0.0.1
 Depends: R (>= 3.4.3)
-Imports: 
+Imports: utils
 Author: Eric Marty <marty@ericmarty.com>
 Maintainer: Eric Marty <marty@ericmarty.com>
 Description: This package provides a simple wrapper for the Project Tycho 2.0 web API.

@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 
 # tycho2
 
+Author: Eric Marty  
 This R package provides a simple wrapper for the [Project Tycho](https://www.tycho.pitt.edu/) 2.0 web API. 
 
 ## Project Tycho
@@ -32,6 +33,12 @@ Project Tycho 2.0 datasets are represented in a standard format registered with 
 Precompiled datasets with DOI's are also available for download directly from the [Project Tycho](https://www.tycho.pitt.edu/).
 
 See <https://www.tycho.pitt.edu/dataset/api/> for complete documentation of the API. 
+
+Project Tycho database, website and API are by:   
+[Wilbert van Panhuis](https://www.tycho.pitt.edu/people/person/49/) (Principal Investogator)  
+[Donald Burke](https://www.tycho.pitt.edu/people/person/66/) (Principal Investogator)
+[Anne Cross](https://www.tycho.pitt.edu/people/person/50/) (Database Programmer)
+Project Tycho is published under a [Creative Commons Attribution 4.0 International Public License](http://creativecommons.org/licenses/by/4.0/).
 
 ## tycho2 package
 
