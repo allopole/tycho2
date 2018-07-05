@@ -6,6 +6,12 @@ Author: Eric Marty
 This R package provides a simple wrapper for the [Project
 Tycho](https://www.tycho.pitt.edu/) 2.0 web API.
 
+The development of this package was supported by the National Institute
+of General Medical Sciences of the National Institutes of Health under
+Award Number U01GM110744. The content is solely the responsibility of
+the authors and does not necessarily reflect the official views of the
+National Institutes of Health.
+
 Project Tycho
 -------------
 
@@ -38,9 +44,11 @@ Project Tycho database, website and API are by:
 [Wilbert van Panhuis](https://www.tycho.pitt.edu/people/person/49/)
 (Principal Investogator)  
 [Donald Burke](https://www.tycho.pitt.edu/people/person/66/) (Principal
-Investogator) [Anne Cross](https://www.tycho.pitt.edu/people/person/50/)
-(Database Programmer) Project Tycho is published under a [Creative
-Commons Attribution 4.0 International Public
+Investogator)  
+[Anne Cross](https://www.tycho.pitt.edu/people/person/50/) (Database
+Programmer)  
+Project Tycho is published under a [Creative Commons Attribution 4.0
+International Public
 License](http://creativecommons.org/licenses/by/4.0/).
 
 tycho2 package

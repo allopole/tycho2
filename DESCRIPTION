@@ -2,16 +2,22 @@ Package: tycho2
 Type: Package
 Title: Interface to the Project Tycho 2.0 database
 Version: 0.0.1
+Date: 2018-07-11
 Depends: R (>= 3.4.3)
 Imports: utils
 Author: Eric Marty <marty@ericmarty.com>
 Maintainer: Eric Marty <marty@ericmarty.com>
-Description: This package provides a simple wrapper for the Project Tycho 2.0 web API.
-    See <https://www.tycho.pitt.edu/dataset/api/> for complete documentation
-    of the API.  The package includes the generic function `apicall()` to assemble
-    arbitrary web api call URLs from a base URL and query string terms. 
-    The function `tycho2()` calls `apicall` with Tycho's default base URL and applies
-    some automation to facilitate downloading large datasets with a single call.
+URL: https://github.com/allopole/tycho2
+BugReports: https://github.com/allopole/tycho2/issues
+Description: This package provides a simple wrapper for the Project Tycho 2.0 web API. See 
+    <https://www.tycho.pitt.edu/dataset/api/> for complete documentation of the API. The package 
+    includes the generic function `apicall()` to assemble arbitrary web api call URLs from a base 
+    URL and query string terms. The function `tycho2()` calls `apicall` with Tycho's default base 
+    URL and applies some automation to facilitate downloading large datasets with a single call. The
+    development of this package was supported by the National Institute of General Medical Sciences 
+    of the National Institutes of Health under Award Number U01GM110744. The content is solely the 
+    responsibility of the authors and does not necessarily reflect the official views of the 
+    National Institutes of Health.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
