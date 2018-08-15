@@ -25,7 +25,32 @@ way using the \code{>=} and \code{<=} operators (i.e.
 \item{baseurl}{string. Defaults to "https://www.tycho.pitt.edu/api/".}
 }
 \value{
-dataframe
+dataframe with the following possible columns:
+  \item{$ConditionName}{factor. Name of reported condition as listed in \href{https://doi.org/10.25504/FAIRsharing.d88s6e}{SNOMED-CT}}
+  \item{$ConditionSNOMED}{factor. \href{https://doi.org/10.25504/FAIRsharing.d88s6e}{SNOMED-CT} code for reported condition}
+  \item{$PathogenName}{factor. \href{https://doi.org/10.25504/FAIRsharing.fj07xj}{NCBI Taxonomy} organism name for pathogen causing reported condition}
+  \item{$PathogenTaxonID}{factor. \href{https://doi.org/10.25504/FAIRsharing.fj07xj}{NCBI Taxonomy} identifier for pathogen causing reported condition}
+  \item{$Fatalities}{logical. Counts of reported condition ($CountValue) represent fatalities}
+  \item{$CountryName}{factor. \href{https://www.iso.org/obp/ui/#search/code/}{ISO 3166} English Short Name of country}
+  \item{$CountryCode}{factor. \href{https://www.iso.org/obp/ui/#search/code/}{ISO 3166} 2-letter code for country}
+  \item{$Admin1Name}{factor. \href{https://www.iso.org/standard/63546.html}{ISO 3166-2} Name of first administrative subdivision (such as US state)}
+  \item{$Admin1ISO}{factor. \href{https://www.iso.org/standard/63546.html}{ISO 3166-2} code for first administrative subdivision}
+  \item{$Admin2Name}{factor. \href{http://www.geonames.org/}{Geonames} Placename of second order administrative division}
+  \item{$CityName}{factor. \href{http://www.geonames.org/}{Geonames} Name of populated place}
+  \item{$PeriodStartDate}{Date, format: YYYY-MM-DD. Start date of time interval for which a count was reported}
+  \item{$PeriodEndDate}{Date, format: YYYY-MM-DD. End date of time interval for which a count was reported}
+  \item{$PartOfCumulativeCountSeries}{logical. Count is part of a series of cumulative counts
+  (instead of being part of a series of fixed time interval counts)}
+  \item{$AgeRange}{Ordered factor. Age range in years for which a count was reported e.g. "0-18". Max age = 130}
+  \item{$Subpopulation}{factor. "Civilian", "Military", or "None specified"}
+  \item{$PlaceOfAcquisition}{factor. "Domestic", "Abroad", or NA}
+  \item{$DiagnosisCertainty}{factor. \href{https://doi.org/10.25504/FAIRsharing.d88s6e}{SNOMED-CT}
+  Qualifier for certainty of diagnosis for a count condition: "Definite", "Equivocal", "Possible diagnosis","Probable diagnosis", or NA}
+  \item{$SourceName}{factor. Name of the source (system, database, institution) from which counts
+  were obtained by the Project Tycho team}
+  \item{$CountValue}{integer. The count value.}
+  Variables described in detail here:
+  \url{https://www.tycho.pitt.edu/dataformat/ProjectTychoCustomCompiledDataFormat.pdf}
 }
 \description{
 Calls the Tycho 2.0 database using the Tycho 2.0 web API.
