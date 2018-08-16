@@ -79,14 +79,18 @@
 #' @param apikey string. (required).   Your Project Tycho API key. This can also be passed with
 #'   \code{params} or \code{queryterms}.
 #' @param baseurl string. Defaults to "https://www.tycho.pitt.edu/api/".
-#' @param fixdates "cdc", "iso", or NULL.  If `fixdates="cdc"`, PeriodStartDate and PeriodEndDate
+#' @param fixdates "cdc", "iso", or NULL.  If \code{fixdates="cdc"}, PeriodStartDate and PeriodEndDate
 #' are rounded to nearest CDC epidemiological week ("epiweek") start and end days
-#' (Sunday - Saturday), respectively. If `fixdates="cdc"`, PeriodStartDate and PeriodEndDate are
+#' (Sunday - Saturday), respectively. If \code{fixdates="cdc"}, PeriodStartDate and PeriodEndDate are
 #' rounded to nearest ISO week start and end dates (Monday - Sunday), respectively. CDC epiweeks are
 #' used for US data reporting. Elsewhere, epiweeks are synonymous with ISO weeks. Rounding is done
-#' with This param may be \code{\link{round2wday}}
-#' necessary because some entries in the Tycho 2.0 database have incorrect dates that may be off by
-#' one day from the actual epiweek start or end dates. default=NULL.
+#' with \code{\link{round2wday}}. This param may be necessary because some entries in the Tycho 2.0
+#' database have incorrect dates that may be off by one day from the actual epiweek start or end
+#' dates. default=NULL.
+#' @param start Date, POSIXct, POSIXlt, or character string in "YYYY-MM-DD" format. The start date.
+#' If present, overrides "PeriodStartDate" passed to \code{queryterms}. Default = NULL
+#' @param end Date, POSIXct, POSIXlt, or character string in "YYYY-MM-DD" format. The end date.
+#' If present, overrides "PeriodEndDate" passed to \code{queryterms}. Default = NULL
 #'
 #' @return dataframe with the following possible columns:
 #'   \item{$ConditionName}{factor. Name of reported condition as listed in \href{https://doi.org/10.25504/FAIRsharing.d88s6e}{SNOMED-CT}}
@@ -142,12 +146,27 @@
 #' @export
 #' @importFrom utils read.csv
 #'
-tycho2 <- function(path="", params=NULL, queryterms=NULL, apikey=NULL, baseurl="https://www.tycho.pitt.edu/api/"){
+tycho2 <- function(path="", params=NULL, queryterms=NULL, apikey=NULL,
+                   baseurl="https://www.tycho.pitt.edu/api/",
+                   fixdates=NULL, start=NULL, end=NULL){
   p <- params
   p$offset <- 0
   p$limit <- 5000
   q <- queryterms[-grep("offset",queryterms)]
   q <- queryterms[-grep("limit",queryterms)]
+
+  if(!is.null(start)){
+    q <- c(
+      queryterms[-grep("PeriodStartDate",queryterms)],
+      paste0("PeriodStartDate>=",as.Date(start))
+      )
+  }
+  if(!is.null(end)){
+    q <- c(
+      queryterms[-grep("PeriodEndDate",queryterms)],
+      paste0("PeriodEndDate>=",as.Date(end))
+    )
+  }
 
   out <- utils::read.csv(apicall(baseurl=baseurl,path=path,params=p,queryterms=queryterms,apikey=apikey))
   more <- nrow(out)>=5000

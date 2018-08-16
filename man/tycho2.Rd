@@ -5,7 +5,8 @@
 \title{Get data from Tycho 2.0 database}
 \usage{
 tycho2(path = "", params = NULL, queryterms = NULL, apikey = NULL,
-  baseurl = "https://www.tycho.pitt.edu/api/")
+  baseurl = "https://www.tycho.pitt.edu/api/", fixdates = NULL,
+  start = NULL, end = NULL)
 }
 \arguments{
 \item{path}{string (optional). Must be either "query" to perform data queries, or one of the
@@ -24,14 +25,20 @@ way using the \code{>=} and \code{<=} operators (i.e.
 
 \item{baseurl}{string. Defaults to "https://www.tycho.pitt.edu/api/".}
 
-\item{fixdates}{"cdc", "iso", or NULL.  If `fixdates="cdc"`, PeriodStartDate and PeriodEndDate
+\item{fixdates}{"cdc", "iso", or NULL.  If \code{fixdates="cdc"}, PeriodStartDate and PeriodEndDate
 are rounded to nearest CDC epidemiological week ("epiweek") start and end days
-(Sunday - Saturday), respectively. If `fixdates="cdc"`, PeriodStartDate and PeriodEndDate are
+(Sunday - Saturday), respectively. If \code{fixdates="cdc"}, PeriodStartDate and PeriodEndDate are
 rounded to nearest ISO week start and end dates (Monday - Sunday), respectively. CDC epiweeks are
 used for US data reporting. Elsewhere, epiweeks are synonymous with ISO weeks. Rounding is done
-with This param may be \code{\link{round2wday}}
-necessary because some entries in the Tycho 2.0 database have incorrect dates that may be off by
-one day from the actual epiweek start or end dates. default=NULL.}
+with \code{\link{round2wday}}. This param may be necessary because some entries in the Tycho 2.0
+database have incorrect dates that may be off by one day from the actual epiweek start or end
+dates. default=NULL.}
+
+\item{start}{Date, POSIXct, POSIXlt, or character string in "YYYY-MM-DD" format. The start date.
+If present, overrides "PeriodStartDate" passed to \code{queryterms}. Default = NULL}
+
+\item{end}{Date, POSIXct, POSIXlt, or character string in "YYYY-MM-DD" format. The end date.
+If present, overrides "PeriodEndDate" passed to \code{queryterms}. Default = NULL}
 }
 \value{
 dataframe with the following possible columns:
