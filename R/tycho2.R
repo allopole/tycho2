@@ -179,12 +179,15 @@ tycho2 <- function(path="", params=NULL, queryterms=NULL, apikey=NULL,
     }
   }
 
-  if(!is.null(fixdates) & fixdates %in% c("cdc","iso")) {
-    week.start <- weekdaynumbers[paste0(fixdates,"week.start")]
-    week.end <- weekdaynumbers[paste0(fixdates,"week.end")]
-  }else{
-    warning('"fixdates" must be "cdc", "iso" or NULL. Ignoring "fixdates".')
+  if(!is.null(fixdates)) {
+    if (fixdates %in% c("cdc","iso")) {
+      week.start <- weekdaynumbers[paste0(fixdates,"week.start")]
+      week.end <- weekdaynumbers[paste0(fixdates,"week.end")]
+    }else{
+      warning('"fixdates" must be "cdc", "iso" or NULL. Ignoring "fixdates".')
+    }
   }
+
 
   # classes
   vars <- colnames(out)
@@ -225,11 +228,14 @@ tycho2 <- function(path="", params=NULL, queryterms=NULL, apikey=NULL,
   if("PeriodStartDate" %in% vars) {
     out$PeriodStartDate <- as.Date(out$PeriodStartDate,format = "%Y-%m-%d")
     if(!is.null(fixdates)) {
-      out$PeriodStartDate <- round2wday(out$PeriodEndDate,"cdcweek.start")
+      out$PeriodStartDate <- round2wday(out$PeriodStartDate,week.start)
     }
   }
   if("PeriodEndDate" %in% vars) {
     out$PeriodEndDate <- as.Date(out$PeriodEndDate,format = "%Y-%m-%d")
+    if(!is.null(fixdates)) {
+      out$PeriodEndDate <- round2wday(out$PeriodEndDate,week.end)
+    }
   }
   if("PartOfCumulativeCountSeries" %in% vars) {
     out$PartOfCumulativeCountSeries <- as.logical(out$PartOfCumulativeCountSeries)
