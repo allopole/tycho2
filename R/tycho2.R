@@ -152,23 +152,23 @@ tycho2 <- function(path="", params=NULL, queryterms=NULL, apikey=NULL,
   p <- params
   p$offset <- 0
   p$limit <- 5000
-  q <- queryterms[-grep("offset",queryterms)]
-  q <- queryterms[-grep("limit",queryterms)]
+  q <- queryterms[grep("offset",queryterms,invert = TRUE)]
+  q <- queryterms[grep("limit",queryterms,invert = TRUE)]
 
   if(!is.null(start)){
     q <- c(
-      queryterms[-grep("PeriodStartDate",queryterms)],
+      q[grep("PeriodStartDate",q,invert = TRUE)],
       paste0("PeriodStartDate>=",as.Date(start))
       )
   }
   if(!is.null(end)){
     q <- c(
-      queryterms[-grep("PeriodEndDate",queryterms)],
-      paste0("PeriodEndDate>=",as.Date(end))
+      q[grep("PeriodEndDate",q,invert = TRUE)],
+      paste0("PeriodEndDate<=",as.Date(end))
     )
   }
 
-  out <- utils::read.csv(apicall(baseurl=baseurl,path=path,params=p,queryterms=queryterms,apikey=apikey))
+  out <- utils::read.csv(apicall(baseurl=baseurl,path=path,params=p,queryterms=q,apikey=apikey))
   more <- nrow(out)>=5000
   while (more == TRUE) {
     p$offset <- p$offset+5000
