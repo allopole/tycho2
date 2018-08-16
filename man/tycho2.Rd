@@ -23,6 +23,15 @@ way using the \code{>=} and \code{<=} operators (i.e.
 \code{params} or \code{queryterms}.}
 
 \item{baseurl}{string. Defaults to "https://www.tycho.pitt.edu/api/".}
+
+\item{fixdates}{"cdc", "iso", or NULL.  If `fixdates="cdc"`, PeriodStartDate and PeriodEndDate
+are rounded to nearest CDC epidemiological week ("epiweek") start and end days
+(Sunday - Saturday), respectively. If `fixdates="cdc"`, PeriodStartDate and PeriodEndDate are
+rounded to nearest ISO week start and end dates (Monday - Sunday), respectively. CDC epiweeks are
+used for US data reporting. Elsewhere, epiweeks are synonymous with ISO weeks. Rounding is done
+with This param may be \code{\link{round2wday}}
+necessary because some entries in the Tycho 2.0 database have incorrect dates that may be off by
+one day from the actual epiweek start or end dates. default=NULL.}
 }
 \value{
 dataframe with the following possible columns:

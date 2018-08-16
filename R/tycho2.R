@@ -79,6 +79,14 @@
 #' @param apikey string. (required).   Your Project Tycho API key. This can also be passed with
 #'   \code{params} or \code{queryterms}.
 #' @param baseurl string. Defaults to "https://www.tycho.pitt.edu/api/".
+#' @param fixdates "cdc", "iso", or NULL.  If `fixdates="cdc"`, PeriodStartDate and PeriodEndDate
+#' are rounded to nearest CDC epidemiological week ("epiweek") start and end days
+#' (Sunday - Saturday), respectively. If `fixdates="cdc"`, PeriodStartDate and PeriodEndDate are
+#' rounded to nearest ISO week start and end dates (Monday - Sunday), respectively. CDC epiweeks are
+#' used for US data reporting. Elsewhere, epiweeks are synonymous with ISO weeks. Rounding is done
+#' with This param may be \code{\link{round2wday}}
+#' necessary because some entries in the Tycho 2.0 database have incorrect dates that may be off by
+#' one day from the actual epiweek start or end dates. default=NULL.
 #'
 #' @return dataframe with the following possible columns:
 #'   \item{$ConditionName}{factor. Name of reported condition as listed in \href{https://doi.org/10.25504/FAIRsharing.d88s6e}{SNOMED-CT}}
@@ -152,6 +160,13 @@ tycho2 <- function(path="", params=NULL, queryterms=NULL, apikey=NULL, baseurl="
     }
   }
 
+  if(!is.null(fixdates) & fixdates %in% c("cdc","iso")) {
+    week.start <- weekdays[paste0(fixdates,"week.start")]
+    week.end <- weekdays[paste0(fixdates,"week.end")]
+  }else{
+    warning('"fixdates" must be "cdc", "iso" or NULL. Ignoring "fixdates".')
+  }
+
   # classes
   vars <- colnames(out)
 
@@ -190,7 +205,10 @@ tycho2 <- function(path="", params=NULL, queryterms=NULL, apikey=NULL, baseurl="
   }
   if("PeriodStartDate" %in% vars) {
     out$PeriodStartDate <- as.Date(out$PeriodStartDate,format = "%Y-%m-%d")
+    if(!is.null(fixdates)) {
+      out$PeriodStartDate <- round2wday(out$PeriodEndDate,"cdcweek.start")
     }
+  }
   if("PeriodEndDate" %in% vars) {
     out$PeriodEndDate <- as.Date(out$PeriodEndDate,format = "%Y-%m-%d")
   }
@@ -218,6 +236,12 @@ tycho2 <- function(path="", params=NULL, queryterms=NULL, apikey=NULL, baseurl="
     out$CountValue <- as.integer(out$CountValue)
   }
 
-
   return(out)
 }
+
+
+out <- data.frame(PeriodEndDate=c("1982-01-10","1982-01-16"), CountValue=c(2,1))
+
+
+
+
