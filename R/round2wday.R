@@ -1,7 +1,9 @@
 #' Round a date to the nearest specified weekday
 #'
-#' \code{round2wday} rounds a date to the nearest target weekday. Target weekday can be specified as
-#' a named weekday or its numerical equivalent, from the following table:
+#' \code{round2wday} rounds a date to the nearest target weekday.
+#'
+#' Target weekday can be specified as a named weekday or its numerical equivalent,
+#' from the following table:
 #'
 #' \tabular{rl}{
 #'   \strong{Name} \tab \strong{Number}\cr
@@ -38,10 +40,3 @@ round2wday <- function(date,targetwday) {
   return(i.date+shift)
 }
 
-# data object "weekdays" (stored with package):
-# weekdays <- c(
-#   "Sunday"=1,"Monday"=2,"Tuesday"=3,"Wednesday"=4,"Thursday"=5,"Friday"=6,"Saturday"=7,
-#   "isoweek.start"=2,"isoweek.end"=1,
-#   "cdcweek.start"=1,"cdcweek.end"=7
-# )
-# devtools::use_data(weekdays)

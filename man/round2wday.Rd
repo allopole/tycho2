@@ -15,10 +15,12 @@ round2wday(date, targetwday)
 Date ("YYYY-MM-DD")
 }
 \description{
-\code{round2wday} rounds a date to the nearest target weekday. Target weekday can be specified as
-a named weekday or its numerical equivalent, from the following table:
+\code{round2wday} rounds a date to the nearest target weekday.
 }
 \details{
+Target weekday can be specified as a named weekday or its numerical equivalent,
+from the following table:
+
 \tabular{rl}{
   \strong{Name} \tab \strong{Number}\cr
   Sunday \tab 1\cr
