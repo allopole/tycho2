@@ -172,7 +172,7 @@ tycho2 <- function(path="", params=NULL, queryterms=NULL, apikey=NULL,
   more <- nrow(out)>=5000
   while (more == TRUE) {
     p$offset <- p$offset+5000
-    df <- read.csv(apicall(baseurl=baseurl,path, params = p, queryterms=queryterms, apikey=apikey))
+    df <- read.csv(apicall(baseurl=baseurl, path, params=p, queryterms=q, apikey=apikey))
     more <- nrow(df)>0
     if (more) {
       out <- rbind(out,df)
