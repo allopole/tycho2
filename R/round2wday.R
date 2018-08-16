@@ -28,11 +28,11 @@ round2wday <- function(date,targetwday) {
   if(is.numeric(targetwday)) {
     t.day <- as.integer(targetwday)
   }else{
-    t.day <- as.integer(weekdays[targetwday])
+    t.day <- as.integer(weekdaynumbers[targetwday])
   }
   if(is.na(t.day)) {
     stop(paste("targetweekday must be an integer 1 to 7, or one of:\n",
-               paste(names(weekdays),collapse = ", ")))
+               paste(names(weekdaynumbers),collapse = ", ")))
   }
   i.date <- as.Date(date)
   i.day <- as.POSIXlt(i.date)$wday + 1L

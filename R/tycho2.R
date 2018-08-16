@@ -180,8 +180,8 @@ tycho2 <- function(path="", params=NULL, queryterms=NULL, apikey=NULL,
   }
 
   if(!is.null(fixdates) & fixdates %in% c("cdc","iso")) {
-    week.start <- weekdays[paste0(fixdates,"week.start")]
-    week.end <- weekdays[paste0(fixdates,"week.end")]
+    week.start <- weekdaynumbers[paste0(fixdates,"week.start")]
+    week.end <- weekdaynumbers[paste0(fixdates,"week.end")]
   }else{
     warning('"fixdates" must be "cdc", "iso" or NULL. Ignoring "fixdates".')
   }
