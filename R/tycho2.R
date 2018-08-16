@@ -259,8 +259,5 @@ tycho2 <- function(path="", params=NULL, queryterms=NULL, apikey=NULL,
 }
 
 
-out <- data.frame(PeriodEndDate=c("1982-01-10","1982-01-16"), CountValue=c(2,1))
-
-
 
 
