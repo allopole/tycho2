@@ -1,7 +1,7 @@
 Package: tycho2
 Type: Package
 Title: Interface to the Project Tycho 2.0 database
-Version: 0.0.1.9000
+Version: 0.1.0
 Date: 2018-07-11
 Depends: R (>= 3.4.3)
 Imports: utils
