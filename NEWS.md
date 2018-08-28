@@ -1,3 +1,8 @@
+# tycho2 0.1.0.9000
+
+* update readme  
+
+
 # tycho2 0.1.0
 
 * fixed classes of returned dataframe columns
