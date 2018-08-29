@@ -4,7 +4,7 @@ Title: Interface to the Project Tycho 2.0 database
 Version: 0.1.0.9000
 Date: 2018-07-11
 Depends: R (>= 3.4.3)
-Imports: utils
+Imports: utils, stats, dplyr, padr, rlang, tibble, zoo
 Author: Eric Marty <marty@ericmarty.com>
 Maintainer: Eric Marty <marty@ericmarty.com>
 URL: https://github.com/allopole/tycho2
