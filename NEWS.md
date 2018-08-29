@@ -1,4 +1,4 @@
-# tycho2 0.1.0.9000
+# tycho2 0.2.0
 
 * update readme  
 * added 'dataframe2zoo()' and 'tycho2zoo()'
