@@ -5,11 +5,11 @@
 \title{Assemble a web API call URL}
 \usage{
 apicall(baseurl, path = "", params = NULL, queryterms = NULL,
-  apikey = NULL)
+  apikey = NULL, format = NULL)
 }
 \arguments{
 \item{baseurl}{string. The base URL to which an additional path and additional query terms may be
-appended.}
+appended. If baseurl does not begin with 'http://' or 'https://', then 'https://' is prepended.}
 
 \item{path}{string (optional). An additional path to be appended to the base URL before the "?"
 separator and query terms.}
@@ -23,6 +23,11 @@ allows operators other than \code{=}, for example \code{http://foo.foo/query?cou
 
 \item{apikey}{string. (optional). An API key. The API key can also be passed with \code{params}
 or \code{queryterms}.}
+
+\item{format}{string. (optional). A reponse format given as an extension. If none is specified,
+the API's default reponse format will be requested. Many API's use JSON as the default. Example
+formats might include "csv", "xlm", etc. The format will be appended to the API call as a file
+extension.}
 }
 \value{
 string
@@ -47,6 +52,7 @@ passed to the \code{queryterms} argument. An API Key, if required, can be set vi
 \code{apicall()} automatically replaces spaces with \code{\%20} in the final URL.
 }
 \examples{
+\dontrun{
 apicall(baseurl="http://foo.com/", path="list")
 
 p <- list(author="Davy Jones",format="book")
@@ -56,5 +62,6 @@ q <- c("author=Davy Jones","year>=1980")
 apicall(baseurl="http://foo.com/", path="search", queryterms=q)
 
 apicall(baseurl="http://foo.com/search", params=p, queryterms="year>=1980", apikey="123abc")
+}
 
 }

@@ -1,9 +1,9 @@
 Package: tycho2
 Type: Package
 Title: Interface to the Project Tycho 2.0 database
-Version: 0.2.0
+Version: 0.3
 Date: 2018-07-11
-Depends: R (>= 3.4.3)
+Depends: R (>= 3.4)
 Imports: utils, stats, dplyr, padr, rlang, tibble, zoo
 Author: Eric Marty <marty@ericmarty.com>
 Maintainer: Eric Marty <marty@ericmarty.com>
@@ -21,4 +21,4 @@ Description: This package provides a simple wrapper for the Project Tycho 2.0 we
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1

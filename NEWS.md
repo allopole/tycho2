@@ -1,3 +1,8 @@
+# tycho2 0.3.0
+
+* added argument to `apicall()` to specify reponse format
+* `apicall()` now resolves incomplete urls and fixes missing and extra slashes
+
 # tycho2 0.2.0
 
 * update readme  

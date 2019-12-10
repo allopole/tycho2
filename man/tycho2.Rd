@@ -139,6 +139,7 @@ Programmer). Project Tycho is published under a
 Public License}.
 }
 \examples{
+\dontrun{
 # Note: retrive your API key from your Project Tycho account
 
 # List of conditions showing "ConditionName", "ConditionSNOMED"
@@ -160,5 +161,6 @@ queryterms <- c(
   "PeriodEndDate<=2010-01-01"
   )
 Measles_CA_2000_2010 <- tycho2("query", queryterms=queryterms, apikey=TYCHOKEY)
+}
 
 }

@@ -18,7 +18,7 @@
 #' \code{apicall()} automatically replaces spaces with \code{\%20} in the final URL.
 #'
 #' @param baseurl string. The base URL to which an additional path and additional query terms may be
-#'   appended.
+#'   appended. If baseurl does not begin with 'http://' or 'https://', then 'https://' is prepended.
 #' @param path string (optional). An additional path to be appended to the base URL before the "?"
 #'   separator and query terms.
 #' @param params list (optional). A list of query terms in the form
@@ -28,10 +28,15 @@
 #'   allows operators other than \code{=}, for example \code{http://foo.foo/query?count>=20}.
 #' @param apikey string. (optional). An API key. The API key can also be passed with \code{params}
 #'   or \code{queryterms}.
+#' @param format string. (optional). A reponse format given as an extension. If none is specified,
+#' the API's default reponse format will be requested. Many API's use JSON as the default. Example
+#' formats might include "csv", "xlm", etc. The format will be appended to the API call as a file
+#' extension.
 #'
 #' @return string
 #'
 #' @examples
+#' \dontrun{
 #' apicall(baseurl="http://foo.com/", path="list")
 #'
 #' p <- list(author="Davy Jones",format="book")
@@ -41,11 +46,17 @@
 #' apicall(baseurl="http://foo.com/", path="search", queryterms=q)
 #'
 #' apicall(baseurl="http://foo.com/search", params=p, queryterms="year>=1980", apikey="123abc")
+#' }
 #'
 #' @export
 
-apicall <- function(baseurl, path = "", params=NULL, queryterms=NULL, apikey=NULL) {
-  u <- paste0(baseurl,path)
+apicall <- function(baseurl, path = "", params=NULL, queryterms=NULL, apikey=NULL, format=NULL) {
+  b <- gsub('/$', '', baseurl[1]) # strip final slash
+  if(!grepl('^http', b)){ b <- paste0("https://",b) } # resolve protocol
+  c <- gsub('^/', '', path[1]) # strip initial slash
+  c <- gsub('/$', '', c) # strip final slash
+  u <- paste(b,c,sep="/") # concatenate
+
   q <- NULL
   if(!is.null(apikey)) {q <- c(q, paste0("apikey=",apikey))}
   if(!missing(params)) {q <- c(q, paste0(names(params),"=",params))}
@@ -55,6 +66,10 @@ apicall <- function(baseurl, path = "", params=NULL, queryterms=NULL, apikey=NUL
     u <- paste(u,qstring,sep="?")
   }
   u <- gsub(" ","%20",u)
+  if (!is.null(format)){
+    f <- tolower(gsub('\\.', '', format))
+    u <- paste(u,f,sep=".")
+  }
   return(u)
 }
 
